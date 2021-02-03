@@ -9,10 +9,13 @@ exports.postPayment = async (req, res) => {
     const {
         idTipoPagar, descricao, valor, dataVencimento, dataPagamento, desconto, juros
     } = req.body
+    console.log(req.body)
     const { rows } = await db.query(
-        "INSERT INTO financas.pagar VALUES ($1, $2, $3, $4, $5, $6, $7)", 
+        "INSERT INTO financas.pagar (id_tipo_pagar, descricao, valor, data_vencimento, data_pagamento, desconto, juros) VALUES ($1, $2, $3, $4, $5, $6, $7)", 
         [idTipoPagar, descricao, valor, dataVencimento, dataPagamento, desconto, juros]
     )
+
+    console.log(rows)
 
     res.status(201).send({
         message: 'Dados atualizados',
